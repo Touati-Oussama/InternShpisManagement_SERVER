@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import tn.enicarthage.internshipsmanagement.entities.ERole;
 import tn.enicarthage.internshipsmanagement.entities.User;
 import tn.enicarthage.internshipsmanagement.repos.UserRepos;
+import tn.enicarthage.internshipsmanagement.response.UserDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImp implements  UserService{
@@ -42,18 +44,57 @@ public class UserServiceImp implements  UserService{
     }
 
     @Override
-    public List<User> getAllDirections() {
-        return userRepos.findByRole(ERole.DIRECTION);
+    public List<UserDTO> getAllDirections() {
+        return this.userRepos.findByRole(ERole.DIRECTION).stream().map(user -> {
+            UserDTO tmp = new UserDTO();
+            tmp.setUserId(user.getUserId());
+            tmp.setNom(user.getNom());
+            tmp.setPrenom(user.getPrenom());
+            tmp.setTelephone(user.getTelephone());
+            tmp.setEmail(user.getEmail());
+            tmp.setEnabled(user.isEnabled());
+            tmp.setDepartment(user.getDepartment().getNom());
+            tmp.setRole(user.getRole());
+            tmp.setUsername(user.getUsername());
+            tmp.setPassword(user.getPassword());
+            return  tmp;
+        }).collect(Collectors.toList());
     }
 
     @Override
-    public List<User> getAllEnseignants() {
-        return userRepos.findByRole(ERole.ENSEIGNANT);
+    public List<UserDTO> getAllEnseignants() {
+        return this.userRepos.findByRole(ERole.ENSEIGNANT).stream().map(user -> {
+            UserDTO tmp = new UserDTO();
+            tmp.setUserId(user.getUserId());
+            tmp.setNom(user.getNom());
+            tmp.setPrenom(user.getPrenom());
+            tmp.setTelephone(user.getTelephone());
+            tmp.setEmail(user.getEmail());
+            tmp.setEnabled(user.isEnabled());
+            tmp.setDepartment(user.getDepartment().getNom());
+            tmp.setRole(user.getRole());
+            tmp.setUsername(user.getUsername());
+            tmp.setPassword(user.getPassword());
+            return  tmp;
+        }).collect(Collectors.toList());
     }
 
     @Override
-    public List<User> getAllEtudiants() {
-        return userRepos.findByRole(ERole.ETUDIANT);
+    public List<UserDTO> getAllEtudiants() {
+        return this.userRepos.findByRole(ERole.ETUDIANT).stream().map(user -> {
+            UserDTO tmp = new UserDTO();
+            tmp.setUserId(user.getUserId());
+            tmp.setNom(user.getNom());
+            tmp.setPrenom(user.getPrenom());
+            tmp.setTelephone(user.getTelephone());
+            tmp.setEmail(user.getEmail());
+            tmp.setEnabled(user.isEnabled());
+            tmp.setDepartment(user.getDepartment().getNom());
+            tmp.setRole(user.getRole());
+            tmp.setUsername(user.getUsername());
+            tmp.setPassword(user.getPassword());
+            return  tmp;
+        }).collect(Collectors.toList());
     }
 
     @Override

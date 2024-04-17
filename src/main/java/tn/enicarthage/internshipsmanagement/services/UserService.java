@@ -1,6 +1,7 @@
 package tn.enicarthage.internshipsmanagement.services;
 
 import tn.enicarthage.internshipsmanagement.entities.User;
+import tn.enicarthage.internshipsmanagement.response.UserDTO;
 
 import java.util.List;
 
@@ -10,11 +11,11 @@ public interface UserService {
     void deleteUser(User user);
     void deleteUserById(Long id);
     User getUser(Long id);
-    List<User> getAllDirections();
+    List<UserDTO> getAllDirections();
 
-    List<User> getAllEnseignants();
+    List<UserDTO> getAllEnseignants();
 
-    List<User> getAllEtudiants();
+    List<UserDTO> getAllEtudiants();
 
     User findBySfe(String msg);
 
