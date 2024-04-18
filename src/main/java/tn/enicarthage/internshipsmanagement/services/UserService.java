@@ -17,6 +17,8 @@ public interface UserService {
 
     List<UserDTO> getAllEtudiants();
 
+    List<UserDTO> getDemandes();
+
     User findBySfe(String msg);
 
 }

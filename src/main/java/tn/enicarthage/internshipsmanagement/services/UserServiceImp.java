@@ -98,6 +98,24 @@ public class UserServiceImp implements  UserService{
     }
 
     @Override
+    public List<UserDTO> getDemandes() {
+        return this.userRepos.findByEnabled(false).stream().map(user -> {
+            UserDTO tmp = new UserDTO();
+            tmp.setUserId(user.getUserId());
+            tmp.setNom(user.getNom());
+            tmp.setPrenom(user.getPrenom());
+            tmp.setTelephone(user.getTelephone());
+            tmp.setEmail(user.getEmail());
+            tmp.setEnabled(user.isEnabled());
+            tmp.setDepartment(user.getDepartment().getNom());
+            tmp.setRole(user.getRole());
+            tmp.setUsername(user.getUsername());
+            tmp.setPassword(user.getPassword());
+            return  tmp;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
     public User findBySfe(String msg) {
         return userRepos.findBySfe(msg);
     }

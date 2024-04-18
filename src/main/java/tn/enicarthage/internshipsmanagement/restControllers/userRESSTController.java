@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import tn.enicarthage.internshipsmanagement.response.CommentaireDTO;
 import tn.enicarthage.internshipsmanagement.services.UserService;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -30,6 +28,9 @@ public class userRESSTController {
         return ResponseEntity.ok(userService.getAllEnseignants());
     }
 
-
+    @RequestMapping(value = "/demandes", method= RequestMethod.GET)
+    ResponseEntity<?> getDemandes(){
+        return ResponseEntity.ok(userService.getDemandes());
+    }
 
 }

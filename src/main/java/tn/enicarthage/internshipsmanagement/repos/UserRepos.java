@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface UserRepos extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
+    List<User> findByEnabled(Boolean enabled);
+
     @Query("SELECT u FROM User u WHERE u.role = ?1")
     List<User> findByRole(ERole role);
 
