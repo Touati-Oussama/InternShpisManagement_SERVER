@@ -15,6 +15,7 @@ import tn.enicarthage.internshipsmanagement.response.ResponseFile;
 import tn.enicarthage.internshipsmanagement.response.ResponseMessage;
 import tn.enicarthage.internshipsmanagement.services.FileStorageService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,20 +66,6 @@ public class FileController {
   
   @GetMapping("/etudiant/{id}")
   public  ResponseEntity<ResponseFile>  getFileByEtud(@PathVariable("id") Long id) {
-	    /*List<ResponseFile> files = storageService.getByEtudiant(id).map(dbFile -> {
-	        String fileDownloadUri = ServletUriComponentsBuilder
-	            .fromCurrentContextPath()
-	            .path("/files/")
-	            .path(dbFile.getId())
-	            .toUriString();
-
-	        return new ResponseFile(
-	        	dbFile.getId(),
-	            dbFile.getName(),
-	            fileDownloadUri,
-	            dbFile.getType(),
-	            dbFile.getData().length);
-	      }).collect(Collectors.toList());*/
            FileDB f  = storageService.getByEtudiant(id);
            String fileDownloadUri = ServletUriComponentsBuilder
               .fromCurrentContextPath()
@@ -94,19 +81,24 @@ public class FileController {
   }
 
     @GetMapping("/sfe/{id}")
-    public  ResponseEntity<ResponseFile>  getFileBySFE(@PathVariable("id") int id) {
-        FileDB f  = storageService.getBySfe(id);
-        String fileDownloadUri = ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/files/")
-                .path(f.getId())
-                .toUriString();
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseFile(
-                f.getId(),
-                f.getName(),
-                fileDownloadUri,
-                f.getType(),
-                f.getData().length));
+    public ResponseEntity<List<ResponseFile>> getFileBySFE(@PathVariable("id") int id) {
+        List<FileDB> files = storageService.getBySfe(id);
+        List<ResponseFile> responseFiles = files.stream()
+                .map(f -> {
+                    String fileDownloadUri = ServletUriComponentsBuilder
+                            .fromCurrentContextPath()
+                            .path("/files/")
+                            .path(f.getId())
+                            .toUriString();
+                    return new ResponseFile(
+                            f.getId(),
+                            f.getName(),
+                            fileDownloadUri,
+                            f.getType(),
+                            f.getData().length);
+                })
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(responseFiles);
     }
 
   @GetMapping("/{id}")
@@ -128,7 +120,7 @@ public class FileController {
   
   @GetMapping("/getBySfe/{id}")
   public ResponseEntity<?> getBySfe(@PathVariable int id) {
-    FileDB fileDB = storageService.getBySfe(id);
+    List<FileDB> fileDB = storageService.getBySfe(id);
 	JSONResponse res = new JSONResponse();
 	if (fileDB != null)
 		res.setMsg("Fichier trouvé");

@@ -27,7 +27,7 @@ public class FileDB {
   @Lob
   private byte[] data;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private SFE sfe;
 
 

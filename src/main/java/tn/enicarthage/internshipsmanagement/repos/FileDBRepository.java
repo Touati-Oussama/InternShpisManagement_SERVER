@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface FileDBRepository extends JpaRepository<FileDB, String> {
 
-	FileDB findBySfeId(int id);
+	List<FileDB> findBySfeId(int id);
 	FileDB findBySfeEtudiantUserId(Long id);
 
 }

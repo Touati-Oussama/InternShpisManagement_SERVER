@@ -28,9 +28,9 @@ public class SFE {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sfe")
     List<Commentaire> commentaires;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "sfe")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sfe")
     @JsonIgnore
-    FileDB file;
+    private List<FileDB> files;
 
     @OneToOne(mappedBy = "sfe")
     @JsonIgnore

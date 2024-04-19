@@ -9,6 +9,7 @@ import tn.enicarthage.internshipsmanagement.entities.FileDB;
 import tn.enicarthage.internshipsmanagement.repos.FileDBRepository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
 
 
@@ -45,8 +46,12 @@ public class FileStorageService {
   public Stream<FileDB> getAllFiles() {
     return fileDBRepository.findAll().stream();
   }
-  
-  public FileDB getBySfe(int id) {
-	  return this.fileDBRepository.findBySfeId(id);
+
+  public List<FileDB> getBySfe(int id) {
+    return this.fileDBRepository.findBySfeId(id);
   }
+
+  /*public FileDB getBySfe(int id) {
+	  return this.fileDBRepository.findBySfeId(id);
+  }*/
 }
