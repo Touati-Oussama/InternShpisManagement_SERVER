@@ -55,6 +55,12 @@ public class SfeRESTController {
 		
 		return SFEService.getAllSFEsByEtudiant(id);
 	}
+	@RequestMapping(value="/etudiant/username/{username}", method= RequestMethod.GET)
+	DemandeEnDTO getSFEbyEtud(@PathVariable("username") String username){
+
+		return SFEService.getAllSFEsByEtudiantUsername(username);
+	}
+
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public SFE  getSFEById(@PathVariable("id") int id)
@@ -82,7 +88,7 @@ public class SfeRESTController {
 	public 	SFE createSFETest(@PathVariable("idEns") Long ensId, @PathVariable("idEtud") Long etudId ) {
 		DemandeEncadrement d = this.demandeService.getDemandeEncadrementByEnsEtud(ensId,etudId);
 		d.setEtat(Etat.ACCEPTATION);
-		demandeService.updateDemandeEncadrement(d);
+		demandeService.updateDemandeEncadrement(Etat.ACCEPTATION,d.getEtudiant().getUserId(),d.getEncadreur().getUserId());
 		SFE sfe = new SFE();
 		sfe.setEtudiant(d.getEtudiant());
 		sfe.setEncadreur(d.getEncadreur());

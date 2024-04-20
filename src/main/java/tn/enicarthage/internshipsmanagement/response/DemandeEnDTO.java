@@ -15,6 +15,9 @@ public class DemandeEnDTO {
     private String etudiant;
     private String email;
     private String etat;
+    private String encadreur;
+    private Long idEtud;
+    private Long idEns;
 
 
 

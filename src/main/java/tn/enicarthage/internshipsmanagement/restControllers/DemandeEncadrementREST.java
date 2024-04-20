@@ -80,9 +80,11 @@ public class DemandeEncadrementREST {
 		return demandeService.saveDemandeEncadrement(d);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
-	public DemandeEncadrement updateDemandeEncadrement(@RequestBody DemandeEncadrement DemandeEncadrement) {
-		return demandeService.updateDemandeEncadrement(DemandeEncadrement);
+	@RequestMapping(value ="/update/{idEns}/{idEtud}/{etat}"  ,method = RequestMethod.PUT)
+	public DemandeEncadrement updateDemandeEncadrement(@PathVariable("idEns") Long idEns,
+													   @PathVariable("etat") Etat etat,
+													   @PathVariable("idEtud") Long idEtud) {
+		return demandeService.updateDemandeEncadrement(etat,idEtud,idEns);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)

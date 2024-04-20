@@ -1,9 +1,12 @@
 package tn.enicarthage.internshipsmanagement.services;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.enicarthage.internshipsmanagement.entities.DemandeEncadrement;
+import tn.enicarthage.internshipsmanagement.entities.Etat;
+import tn.enicarthage.internshipsmanagement.entities.SFE;
 import tn.enicarthage.internshipsmanagement.entities.User;
 import tn.enicarthage.internshipsmanagement.repos.DemnadeEncadrementRepos;
 import tn.enicarthage.internshipsmanagement.response.DemandeEnDTO;
@@ -12,20 +15,32 @@ import tn.enicarthage.internshipsmanagement.response.DemandeEtudDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class DemandeEncadrementServiceImp implements DemandeEncadrementService{
 	
 
-	@Autowired
-	DemnadeEncadrementRepos demandeRepository;
+
+	private final DemnadeEncadrementRepos demandeRepository;
+	private final SfeService sfeService;
 	@Override
 	public DemandeEncadrement saveDemandeEncadrement(DemandeEncadrement e) {
 		return this.demandeRepository.save(e);
 	}
 
 	@Override
-	public DemandeEncadrement updateDemandeEncadrement(DemandeEncadrement e) {
-		return this.demandeRepository.save(e);
+	public DemandeEncadrement updateDemandeEncadrement(Etat e, Long idEtud,Long idEns) {
+		DemandeEncadrement d = getDemandeEncadrementByEnsEtud(idEns,idEtud);
+		if (e.equals(Etat.ACCEPTATION))
+		{
+			SFE s = new SFE();
+			s.setEtudiant(d.getEtudiant());
+			s.setEncadreur(d.getEncadreur());
+			s.setSujet(d.getSujet());
+			sfeService.saveSFE(s);
+		}
+		d.setEtat(e);
+		return this.demandeRepository.save(d);
 	}
 
 	@Override
@@ -108,6 +123,9 @@ public class DemandeEncadrementServiceImp implements DemandeEncadrementService{
 			d.setEtat(tmp.get(i).getEtat().name());
 			d.setEtudiant(tmp.get(i).getEtudiant().getNom() + " " + tmp.get(i).getEtudiant().getPrenom());
 			d.setEmail(tmp.get(i).getEtudiant().getEmail());
+			d.setIdEtud(tmp.get(i).getEtudiant().getUserId());
+			d.setIdEns(tmp.get(i).getEncadreur().getUserId());
+
 			list.add(d);
 		}
 		return list;

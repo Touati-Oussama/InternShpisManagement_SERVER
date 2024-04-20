@@ -21,6 +21,7 @@ public interface SfeService {
 	List<DemandeEnDTO> getAllSFEsByEng(Long id);
 	SFE findByEtudiantUserId(Long id);
 	List <Commentaire> getCommentaires(int id);
+	DemandeEnDTO getAllSFEsByEtudiantUsername(String username);
 	DemandeEnDTO getAllSFEsByEtudiant(Long id);
 	List <SfeDTO> getAll();
 }

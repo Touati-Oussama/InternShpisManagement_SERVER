@@ -8,6 +8,7 @@ import tn.enicarthage.internshipsmanagement.entities.Commentaire;
 import tn.enicarthage.internshipsmanagement.entities.Entreprise;
 import tn.enicarthage.internshipsmanagement.entities.SFE;
 import tn.enicarthage.internshipsmanagement.entities.Salle;
+import tn.enicarthage.internshipsmanagement.response.JSONResponse;
 import tn.enicarthage.internshipsmanagement.services.EntrepriseService;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class EntrepriseRESTController {
         ent.setSpecialite(e.getSpecialite());
         ent.setRepresentant(e.getRepresentant());
         ent.setTelephone(e.getTelephone());
+        ent.setEmail(e.getEmail());
         return ResponseEntity.ok(this.entrepriseService.updateEntreprise(ent));
     }
 
@@ -45,5 +47,12 @@ public class EntrepriseRESTController {
     public Entreprise getSFEById(@PathVariable("id") int id)
     {
         return entrepriseService.getEntreprise((id));
+    }
+
+    @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity<JSONResponse> deleteById(@PathVariable("id") int id)
+    {
+        entrepriseService.deleteEntrepriseById((id));
+        return  ResponseEntity.ok(new JSONResponse(("L'entreprise est supprimée !")));
     }
 }

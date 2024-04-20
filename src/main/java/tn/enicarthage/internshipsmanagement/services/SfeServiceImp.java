@@ -84,9 +84,30 @@ public class SfeServiceImp implements SfeService{
 				d.setSujet(tmp.getSujet());
 				d.setEtudiant(tmp.getEtudiant().getNom() + " " + tmp.getEtudiant().getPrenom());
 				d.setEmail(tmp.getEtudiant().getEmail());
+				d.setIdEns(tmp.getEncadreur().getUserId());
+				d.setIdEtud(tmp.getEtudiant().getUserId());
+
 				return d;
 			}
 			return null;
+	}
+
+	@Override
+	public DemandeEnDTO getAllSFEsByEtudiantUsername(String username) {
+		// TODO Auto-generated method stub
+		SFE tmp = this.SFERepository.findByEtudiantUsername(username);
+		if (tmp != null) {
+			DemandeEnDTO d = new DemandeEnDTO();
+			d.setId(tmp.getId());
+			d.setSujet(tmp.getSujet());
+			d.setEtudiant(tmp.getEtudiant().getNom() + " " + tmp.getEtudiant().getPrenom());
+			d.setEmail(tmp.getEtudiant().getEmail());
+			d.setIdEns(tmp.getEncadreur().getUserId());
+			d.setIdEtud(tmp.getEtudiant().getUserId());
+			d.setEncadreur(tmp.getEncadreur().getNom() + " " + tmp.getEncadreur().getPrenom());
+			return d;
+		}
+		return null;
 	}
 
 	@Override
