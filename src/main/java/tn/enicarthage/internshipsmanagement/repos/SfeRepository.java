@@ -12,6 +12,7 @@ import java.util.List;
 public interface SfeRepository extends JpaRepository<SFE, Integer>{
 	SFE findByEtudiantUserId(Long id);
 	SFE findByEtudiantUsername(String username);
+	SFE findBySujet(String sujet);
 
 	@Query("Select c from Commentaire c join SFE s on c.sfe = s where s.id = ?1")
 	List <Commentaire> getCommentaires(int id);

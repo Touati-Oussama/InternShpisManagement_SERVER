@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface CommentaireRepository extends JpaRepository<Commentaire, Integer> {
 
-	@Query("select c from Commentaire c where c.sfe.id=:id")
+	@Query("SELECT c FROM Commentaire c WHERE c.sfe.id = :id ORDER BY c.date ASC")
 	List <Commentaire> getCommentairesBySFE(@Param("id") int id);
 }

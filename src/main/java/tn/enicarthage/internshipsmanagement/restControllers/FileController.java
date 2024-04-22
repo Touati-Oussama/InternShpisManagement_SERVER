@@ -57,7 +57,7 @@ public class FileController {
           dbFile.getName(),
           fileDownloadUri,
           dbFile.getType(),
-          dbFile.getData().length);
+          dbFile.getData().length, dbFile.getSfe().getSujet(), dbFile.getSfe().getEtudiant().getNom() + " " + dbFile.getSfe().getEtudiant().getPrenom());
     }).collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.OK).body(files);
@@ -77,7 +77,7 @@ public class FileController {
               f.getName(),
               fileDownloadUri,
               f.getType(),
-              f.getData().length));
+              f.getData().length, f.getSfe().getSujet(), f.getSfe().getEtudiant().getNom() + " " + f.getSfe().getEtudiant().getPrenom()));
   }
 
     @GetMapping("/sfe/{id}")
@@ -95,7 +95,33 @@ public class FileController {
                             f.getName(),
                             fileDownloadUri,
                             f.getType(),
-                            f.getData().length);
+                            f.getData().length,
+                            f.getSfe().getSujet(),
+                            f.getSfe().getEtudiant().getNom() + " " + f.getSfe().getEtudiant().getPrenom());
+                })
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(responseFiles);
+    }
+
+
+    @GetMapping("")
+    public ResponseEntity<List<ResponseFile>> getFileBySFE() {
+        List<FileDB> files = storageService.getAllFilesOrdered();
+        List<ResponseFile> responseFiles = files.stream()
+                .map(f -> {
+                    String fileDownloadUri = ServletUriComponentsBuilder
+                            .fromCurrentContextPath()
+                            .path("/files/")
+                            .path(f.getId())
+                            .toUriString();
+                    return new ResponseFile(
+                            f.getId(),
+                            f.getName(),
+                            fileDownloadUri,
+                            f.getType(),
+                            f.getData().length,
+                            f.getSfe().getSujet(),
+                            f.getSfe().getEtudiant().getNom() + " " + f.getSfe().getEtudiant().getPrenom());
                 })
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(responseFiles);

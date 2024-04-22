@@ -38,9 +38,20 @@ public class DemandeEncadrementServiceImp implements DemandeEncadrementService{
 			s.setEncadreur(d.getEncadreur());
 			s.setSujet(d.getSujet());
 			sfeService.saveSFE(s);
+			updateDemandesToRefus(idEtud,d);
 		}
 		d.setEtat(e);
 		return this.demandeRepository.save(d);
+	}
+
+	private void updateDemandesToRefus(Long idEtud, DemandeEncadrement d) {
+		List<DemandeEncadrement> demandes = demandeRepository.getByEtudId(Math.toIntExact(idEtud));
+		for (DemandeEncadrement demande : demandes) {
+			if (demande != d) {
+				demande.setEtat(Etat.REFUS);
+				demandeRepository.save(demande);
+			}
+		}
 	}
 
 	@Override

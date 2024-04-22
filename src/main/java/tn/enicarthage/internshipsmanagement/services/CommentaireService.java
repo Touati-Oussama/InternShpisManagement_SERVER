@@ -6,6 +6,7 @@ import tn.enicarthage.internshipsmanagement.entities.Commentaire;
 import tn.enicarthage.internshipsmanagement.response.CommentaireDTO;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public interface CommentaireService {
 
@@ -16,5 +17,7 @@ public interface CommentaireService {
 	Commentaire getCommentaire(int id);
 	List<CommentaireDTO> getAllCommentaires();
 	List<CommentaireDTO> getCommentairesBySFE(int id);
+
+
 	
 }

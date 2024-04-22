@@ -1,15 +1,19 @@
 package tn.enicarthage.internshipsmanagement.restControllers;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.enicarthage.internshipsmanagement.Primary_Keys.Etudiant_Encadreur_PK;
 import tn.enicarthage.internshipsmanagement.entities.DemandeEncadrement;
 import tn.enicarthage.internshipsmanagement.entities.Etat;
+import tn.enicarthage.internshipsmanagement.entities.TrelloBoard;
 import tn.enicarthage.internshipsmanagement.entities.User;
 import tn.enicarthage.internshipsmanagement.repos.DemnadeEncadrementRepos;
+import tn.enicarthage.internshipsmanagement.repos.TrelloBoardRepository;
 import tn.enicarthage.internshipsmanagement.request.DemandeEncadremetnModel;
+import tn.enicarthage.internshipsmanagement.request.TrelloBoardReq;
 import tn.enicarthage.internshipsmanagement.response.DemandeEnDTO;
 import tn.enicarthage.internshipsmanagement.response.DemandeEtudDTO;
 import tn.enicarthage.internshipsmanagement.response.JSONResponse;
@@ -22,16 +26,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/DemandeEncadrement")
 @CrossOrigin
+@RequiredArgsConstructor
 public class DemandeEncadrementREST {
 	
-	@Autowired
-	DemandeEncadrementService demandeService;
-	@Autowired
-	DemnadeEncadrementRepos demandeEncadrementRepository;
-	
-	@Autowired
-	UserService userService;
-	
+	 private final DemandeEncadrementService demandeService;
+	 private final DemnadeEncadrementRepos demandeEncadrementRepository;
+	 private final UserService userService;
 
 	
 	@RequestMapping(method= RequestMethod.GET)
@@ -111,4 +111,6 @@ public class DemandeEncadrementREST {
 		this.demandeService.deleteDemandeEncadrement(d);
 		return ResponseEntity.ok(res);
 	}
+
+
 }
