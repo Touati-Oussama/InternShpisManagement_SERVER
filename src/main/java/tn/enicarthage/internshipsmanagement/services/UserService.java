@@ -20,5 +20,5 @@ public interface UserService {
     List<UserDTO> getDemandes();
 
     User findBySfe(String msg);
-
+    List<UserDTO> getAllEnseignantsByDepartment(Long id);
 }

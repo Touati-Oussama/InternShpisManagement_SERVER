@@ -5,6 +5,7 @@ package tn.enicarthage.internshipsmanagement.services;
 import tn.enicarthage.internshipsmanagement.entities.Soutenance;
 import tn.enicarthage.internshipsmanagement.models.SoutenanceModel;
 import tn.enicarthage.internshipsmanagement.response.SoutenanceDTO;
+import tn.enicarthage.internshipsmanagement.response.SoutenanceDTO1;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +27,7 @@ public interface SoutenanceService {
 	List<SoutenanceDTO> findByDateJury(LocalDateTime date,Long id);
 	SoutenanceDTO getBySfeId(int id);
 	SoutenanceDTO getByEtudId(int Long);
-	List<SoutenanceDTO> getByEnId(int Long);
+	List<SoutenanceDTO1> getByEnId(int Long);
 	List<SoutenanceDTO> getBySalle(int id);
 
     String verifierSoutenance(SoutenanceModel sou);

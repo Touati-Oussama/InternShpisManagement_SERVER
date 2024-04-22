@@ -9,6 +9,7 @@ import tn.enicarthage.internshipsmanagement.entities.Soutenance;
 import tn.enicarthage.internshipsmanagement.models.SoutenanceModel;
 import tn.enicarthage.internshipsmanagement.repos.SoutenanceRepository;
 import tn.enicarthage.internshipsmanagement.response.SoutenanceDTO;
+import tn.enicarthage.internshipsmanagement.response.SoutenanceDTO1;
 import tn.enicarthage.internshipsmanagement.services.SalleService;
 import tn.enicarthage.internshipsmanagement.services.SfeService;
 import tn.enicarthage.internshipsmanagement.services.SoutenanceService;
@@ -82,7 +83,7 @@ public class SoutenanceRESTController {
 	
 
 	@RequestMapping(value="/en/{id}", method= RequestMethod.GET)
-	List<SoutenanceDTO> findByEnId(@PathVariable("id") int id){
+	List<SoutenanceDTO1> findByEnId(@PathVariable("id") int id){
 		return this.soutenanceService.getByEnId(id);
 	}
 	
@@ -92,6 +93,7 @@ public class SoutenanceRESTController {
 
 		// Verification de salle, sfe et jurys
 		String msg = this.soutenanceService.verifierSoutenance(sou);
+		System.out.println(msg);
 		if (!msg.isEmpty())
 			return ResponseEntity.badRequest().body(msg);
 		Soutenance soutenence = new Soutenance();
@@ -99,7 +101,8 @@ public class SoutenanceRESTController {
 		soutenence.setPresident(this.encadreurService.getUser(sou.getPresident()));
 		soutenence.setRapporteur(this.encadreurService.getUser(sou.getRapporteur()));
 		soutenence.setSalle(this.salleService.getSalle(sou.getSalle()));
-		System.out.println(sou.getDate());
+		soutenence.setDate(sou.getDate());
 		return ResponseEntity.ok(this.soutenanceService.saveSoutenance(soutenence));
+
 	}
 }

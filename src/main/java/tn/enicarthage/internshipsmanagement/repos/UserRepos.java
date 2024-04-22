@@ -20,5 +20,8 @@ public interface UserRepos extends JpaRepository<User, Long> {
     @Query("select e from User e join SFE s on s.etudiant = e where s.sujet = ?1")
     User findBySfe(String msg);
 
+    @Query("SELECT u FROM User u WHERE u.department.id = :departmentId AND u.role = 'ENSEIGNANT'")
+    List<User> findAllTeachersByDepartment(int departmentId);
+
 
 }

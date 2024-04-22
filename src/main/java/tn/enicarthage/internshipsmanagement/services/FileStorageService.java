@@ -38,11 +38,16 @@ public class FileStorageService {
   }
   
   public FileDB getByEtudiant(Long id) {
-	    return this.fileDBRepository.findBySfeEtudiantUserId(id);
-	  }
-  public FileDB  get(Long id)
+	    return this.fileDBRepository.findBySfeEtudiantUserId(id).get(0);
+  }
+  /*public FileDB  get(Long id)
   {
 	  return this.fileDBRepository.findBySfeEtudiantUserId(id);
+  }*/
+
+  public List<FileDB>  get(Long id)
+  {
+    return this.fileDBRepository.findBySfeEtudiantUserId(id);
   }
   public Stream<FileDB> getAllFiles() {
     return fileDBRepository.findAll().stream();

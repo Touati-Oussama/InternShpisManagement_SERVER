@@ -34,7 +34,7 @@ public class NoteRESTController {
 	@PostMapping("/add")
 	public 	ResponseEntity<?> addNote(@RequestBody NoteModel note) {
 		if (note.getNote() < 0 || note.getNote() > 20)
-			return ResponseEntity.badRequest().body(new JSONResponse("Invalide note"));
+			return ResponseEntity.badRequest().body("La note doit étre entre [0..20]");
 		Note n = new Note();
 		n.setNote(note.getNote());
 		n.setSoutenance(this.soutenanceService.getSoutenance(note.getSoutenance()));

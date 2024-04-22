@@ -107,7 +107,8 @@ public class SfeRESTController {
 	public void deleteSFE(@PathVariable("id") int id) {
 		SFEService.deleteSFEById(id);
 	}
-	
+
+
 	@RequestMapping( value="/findByEtudiant/{id}",method = RequestMethod.GET)
 	public SFE findByEtudiant(@PathVariable("id") Long id) {
 
