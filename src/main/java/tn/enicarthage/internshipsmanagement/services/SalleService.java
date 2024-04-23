@@ -1,6 +1,7 @@
 package tn.enicarthage.internshipsmanagement.services;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.enicarthage.internshipsmanagement.entities.Salle;
@@ -9,10 +10,11 @@ import tn.enicarthage.internshipsmanagement.repos.SalleRepository;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SalleService {
 
-	@Autowired
-	SalleRepository salleReposioty;
+
+	private final SalleRepository salleReposioty;
 	
 	public Salle addSalle(Salle s){
 		return this.salleReposioty.save(s);

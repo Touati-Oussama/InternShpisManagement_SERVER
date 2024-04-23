@@ -1,6 +1,7 @@
 package tn.enicarthage.internshipsmanagement.services;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.enicarthage.internshipsmanagement.entities.Commentaire;
@@ -12,10 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CommentaireServiceImp implements CommentaireService{
 	
-	@Autowired
-	CommentaireRepository commentaireRepository;
+	private final CommentaireRepository commentaireRepository;
 	@Override
 	public Commentaire saveCommentaire(Commentaire e) {
 		return commentaireRepository.save(e);

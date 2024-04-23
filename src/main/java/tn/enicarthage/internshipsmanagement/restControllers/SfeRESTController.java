@@ -131,9 +131,9 @@ public class SfeRESTController {
 		b.setSfe(s);
 
 		String msg = "Cher "+ s.getEtudiant().getNom() +" "+ s.getEtudiant().getPrenom()+ ",\n"+
-				"Nous sommes ravis de vous informer que votre demande d'encadrement pour le sujet <b>"+ s.getSujet() + "</b>" +
-				" a été acceptée par l'enseignant <b>" + s.getEncadreur().getNom()+" " + s.getEncadreur().getPrenom()+
-				"</b>\nPour faciliter le suivi du déroulement de votre stage, nous utilisons la plateforme Trello. Vous aurez besoin d'un compte sur Trello pour accéder à votre espace de travail. " +
+				"Nous sommes ravis de vous informer que votre demande d'encadrement pour le sujet "+ s.getSujet() + "</b>" +
+				" a été acceptée par l'enseignant " + s.getEncadreur().getNom()+" " + s.getEncadreur().getPrenom()+
+				"\nPour faciliter le suivi du déroulement de votre stage, nous utilisons la plateforme Trello. Vous aurez besoin d'un compte sur Trello pour accéder à votre espace de travail. " +
 				"Voici le lien vers votre espace de travail sur Trello: " + board.getUrl()+
 				"\n \n Cordialement \n Direction de Stage à l'ENICARTHAGE";
 		emailSenderService.sendEmail(s.getEtudiant().getEmail(),"STAGE PFE",msg);

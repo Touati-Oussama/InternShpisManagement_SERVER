@@ -4,6 +4,7 @@ package tn.enicarthage.internshipsmanagement.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tn.enicarthage.internshipsmanagement.entities.ERole;
@@ -40,6 +41,19 @@ public class AuthenticationService {
                 .build();
     }
 
+    public AuthenticationResponse update(UserRequest userRequest,Long id) {
+        User user = userRepos.findById(id).get();
+        user.setNom(userRequest.getNom());
+        user.setPrenom(userRequest.getPrenom());
+        user.setEmail(userRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        user.setTelephone(userRequest.getTelephone());
+        user.setUsername(userRequest.getUsername());
+        userRepos.save(user);
+        return AuthenticationResponse.builder()
+                .token("Mise à jour !")
+                .build();
+    }
     public User getUser(Long id){
         return userRepos.findById(id).get();
     }

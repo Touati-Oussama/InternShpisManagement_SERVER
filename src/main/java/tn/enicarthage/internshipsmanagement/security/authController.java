@@ -45,4 +45,11 @@ public class authController {
     public ResponseEntity<AuthenticationResponse> authentication(@RequestBody AuthenticationRequest authRequest){
         return ResponseEntity.ok(authService.authentication(authRequest));
     }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<AuthenticationResponse> update(@RequestBody UserRequest userRequest,
+                                                         @PathVariable("id") Long id){
+        return ResponseEntity.ok(authService.update(userRequest,id));
+    }
+
 }
