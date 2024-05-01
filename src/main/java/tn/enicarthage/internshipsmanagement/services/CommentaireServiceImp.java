@@ -17,10 +17,19 @@ import java.util.stream.Collectors;
 public class CommentaireServiceImp implements CommentaireService{
 	
 	private final CommentaireRepository commentaireRepository;
+	private final NotificationService notificationService;
+
 	@Override
 	public Commentaire saveCommentaire(Commentaire e) {
+		notifyFrontend("New Complaint");
+
 		return commentaireRepository.save(e);
 	}
+
+	private void notifyFrontend(String entityTopic) {
+		notificationService.sendMessage(entityTopic);
+	}
+
 
 	@Override
 	public Commentaire updateCommentaire(Commentaire e) {

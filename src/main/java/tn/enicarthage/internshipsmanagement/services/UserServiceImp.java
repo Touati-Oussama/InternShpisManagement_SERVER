@@ -8,6 +8,7 @@ import tn.enicarthage.internshipsmanagement.repos.UserRepos;
 import tn.enicarthage.internshipsmanagement.response.UserDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,6 +63,16 @@ public class UserServiceImp implements  UserService{
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepos.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userRepos.findByUsername(username);
+    }
+
+    @Override
     public List<UserDTO> getAllEnseignants() {
         return this.userRepos.findByRole(ERole.ENSEIGNANT).stream().map(user -> {
             UserDTO tmp = new UserDTO();
@@ -96,6 +107,11 @@ public class UserServiceImp implements  UserService{
             return  tmp;
         }).collect(Collectors.toList());
     }
+
+
+    @Override
+    public List<User> getEtudiants() {
+        return this.userRepos.findByRole(ERole.ETUDIANT);}
 
     @Override
     public List<UserDTO> getDemandes() {

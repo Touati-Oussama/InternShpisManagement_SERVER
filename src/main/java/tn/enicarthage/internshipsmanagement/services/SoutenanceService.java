@@ -24,6 +24,7 @@ public interface SoutenanceService {
 	//DemandeEnDTO getAllSoutenancesByEtudiant(int id);
 	List<SoutenanceDTO> test(LocalDateTime date,String salle);
 	List<SoutenanceDTO> getBySalleDate(LocalDateTime date,int id);
+	List<Soutenance> findAll();
 	List<SoutenanceDTO> findByDateJury(LocalDateTime date,Long id);
 	SoutenanceDTO getBySfeId(int id);
 	SoutenanceDTO getByEtudId(int Long);

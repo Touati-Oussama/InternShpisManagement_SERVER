@@ -70,6 +70,12 @@ public class SoutenanceServiceImp implements SoutenanceService{
 		}
 		return list;
 	}
+
+
+	@Override
+	public List<Soutenance> findAll() {
+		return this.soutenanceRepository.findAll();
+	}
 	
 	@Override
 	public List<SoutenanceDTO> test( LocalDateTime date,String salle){

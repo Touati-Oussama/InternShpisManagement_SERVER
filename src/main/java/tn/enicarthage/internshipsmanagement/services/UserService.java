@@ -4,6 +4,7 @@ import tn.enicarthage.internshipsmanagement.entities.User;
 import tn.enicarthage.internshipsmanagement.response.UserDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User save(User user);
@@ -12,6 +13,10 @@ public interface UserService {
     void deleteUserById(Long id);
     User getUser(Long id);
     List<UserDTO> getAllDirections();
+
+    Optional<User> findByEmail(String email);
+    Optional<User> findByUsername(String username);
+    List<User> getEtudiants();
 
     List<UserDTO> getAllEnseignants();
 

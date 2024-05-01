@@ -1,11 +1,13 @@
 package tn.enicarthage.internshipsmanagement.security;
 
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tn.enicarthage.internshipsmanagement.entities.ERole;
 import tn.enicarthage.internshipsmanagement.entities.User;
@@ -14,6 +16,7 @@ import tn.enicarthage.internshipsmanagement.services.DepartmentService;
 
 @Service
 @RequiredArgsConstructor
+@Component
 public class AuthenticationService {
 
     private final UserRepos userRepos;
@@ -96,4 +99,6 @@ public class AuthenticationService {
     public User getByUsername(String username) {
         return  userRepos.findByUsername(username).get();
     }
+
+
 }
