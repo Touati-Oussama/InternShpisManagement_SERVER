@@ -11,6 +11,7 @@ import tn.enicarthage.internshipsmanagement.response.SfeDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -138,8 +139,9 @@ public class SfeServiceImp implements SfeService{
 
 	@Override
 	public SFE getSFE(int id) {
-		// TODO Auto-generated method stub
-		return this.SFERepository.findById(id).get();
+		return SFERepository.findById(id)
+				.orElseThrow(() -> new NoSuchElementException("SFE not found for ID: " + id));
 	}
+
 
 }

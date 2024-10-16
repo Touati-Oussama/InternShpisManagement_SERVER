@@ -16,6 +16,7 @@ import tn.enicarthage.internshipsmanagement.response.SoutenanceDTO1;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -191,20 +192,21 @@ public class SoutenanceServiceImp implements SoutenanceService{
 
 	@Override
 	public SoutenanceDTO getByEtudId(int id) {
-		// TODO Auto-generated method stub
-		Soutenance tmp = this.soutenanceRepository.findByEtudId(id);
-		SoutenanceDTO s = new SoutenanceDTO();
-		if (tmp != null) {
+		Optional<Soutenance> optionalSoutenance = this.soutenanceRepository.findByEtudId(id);
+		if (optionalSoutenance.isPresent()) {
+			Soutenance tmp = optionalSoutenance.get();
+
+			SoutenanceDTO s = new SoutenanceDTO();
 			s.setId(tmp.getId());
 			s.setSfe(tmp.getSfe().getSujet());
-			s.setEncadreur(tmp.getSfe().getEncadreur().getNom() + " " +tmp.getSfe().getEncadreur().getPrenom() );
-			s.setPresident(tmp.getPresident().getNom() + " " +tmp.getPresident().getPrenom());
-			s.setRapporteur(tmp.getRapporteur().getNom() + " " +tmp.getRapporteur().getPrenom());
+			s.setEncadreur(tmp.getSfe().getEncadreur().getNom() + " " + tmp.getSfe().getEncadreur().getPrenom());
+			s.setPresident(tmp.getPresident().getNom() + " " + tmp.getPresident().getPrenom());
+			s.setRapporteur(tmp.getRapporteur().getNom() + " " + tmp.getRapporteur().getPrenom());
 			s.setDate(tmp.getDate());
 			s.setSalle(tmp.getSalle().getNom());
 			return s;
 		}
-		return null;
+		return null; // Ou lancez une exception si vous préférez
 	}
 	
 	

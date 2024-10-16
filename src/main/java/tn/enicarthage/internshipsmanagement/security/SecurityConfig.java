@@ -29,11 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->
                         /************ Login & Sign up ******************/
                         request.requestMatchers("/api/v1/auth/**").permitAll().
-                        /*********** Salle
-                        requestMatchers(HttpMethod.POST, "/api/v1/salle/**").hasRole(ERole.DIRECTION.name()).
-                        requestMatchers(HttpMethod.DELETE, "/api/v1/salle/**").hasRole(ERole.DIRECTION.name()).
-                         ******************************/
-                         anyRequest().authenticated())
+                                anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider).addFilterBefore(
                         jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

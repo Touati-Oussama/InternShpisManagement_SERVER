@@ -32,7 +32,7 @@ public class EntrepriseRESTController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<?> updateEtudiant(@RequestBody Entreprise e, @PathVariable("id") int id ) {
+    public ResponseEntity<?> updateEntreprise(@RequestBody Entreprise e, @PathVariable("id") int id ) {
         Entreprise ent = this.entrepriseService.getEntreprise(id);
         ent.setNom(e.getNom());
         ent.setAdresse(e.getAdresse());
@@ -44,7 +44,7 @@ public class EntrepriseRESTController {
     }
 
     @RequestMapping(value="/{id}",method = RequestMethod.GET)
-    public Entreprise getSFEById(@PathVariable("id") int id)
+    public Entreprise getById(@PathVariable("id") int id)
     {
         return entrepriseService.getEntreprise((id));
     }

@@ -8,6 +8,7 @@ import tn.enicarthage.internshipsmanagement.entities.Soutenance;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface SoutenanceRepository extends JpaRepository<Soutenance, Integer> {
 
@@ -21,10 +22,10 @@ public interface SoutenanceRepository extends JpaRepository<Soutenance, Integer>
 	
 	@Query("SELECT e from Soutenance e where e.sfe.id=:id")
 	Soutenance findBySfeId(@Param("id") int id);
-	
-	
+
+
 	@Query("SELECT s from Soutenance s join SFE e on (s.sfe = e) join User et on (e.etudiant = et)  where et.userId=:id")
-	Soutenance findByEtudId(@Param("id") int id);
+	Optional<Soutenance> findByEtudId(@Param("id") int id);
 	
 	@Query("SELECT s from Soutenance s join SFE e on (s.sfe = e) join User en on (e.encadreur = en)  where en.userId=:id or s.president.userId=:id  or s.rapporteur.userId=:id")
 	List<Soutenance> findByEnId(@Param("id") int id);

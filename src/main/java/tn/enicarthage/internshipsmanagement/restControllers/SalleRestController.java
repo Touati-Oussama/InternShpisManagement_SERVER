@@ -44,7 +44,7 @@ public class SalleRestController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public ResponseEntity<?> updateEtudiant(@RequestBody Salle s, @PathVariable("id") int id ) {
+	public ResponseEntity<?> updateSalle(@RequestBody Salle s, @PathVariable("id") int id ) {
 		Salle salle = this.salleService.getSalle(id);
 		salle.setNom(s.getNom());
 		return ResponseEntity.ok(this.salleService.updateSalle(salle));

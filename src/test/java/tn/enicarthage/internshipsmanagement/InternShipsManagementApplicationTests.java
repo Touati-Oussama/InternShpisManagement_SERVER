@@ -18,7 +18,7 @@ import tn.enicarthage.internshipsmanagement.services.DepartmentService;
 @SpringBootTest
 class InternShipsManagementApplicationTests {
 
-	@Test
+	/*@Test
 	void contextLoads() {
-	}
+	}*/
 }

@@ -1,0 +1,30 @@
+services:
+  mysql:
+    container_name: mysql-sql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: internships_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - spring-boot-net
+  spring-boot-app:
+    container_name: internships-app
+    image: spring/internshipsmanagement
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-boot-net
+    depends_on:
+      - mysql
+
+
+volumes:
+  mysql:
+
+networks:
+  spring-boot-net:
+    driver: bridge

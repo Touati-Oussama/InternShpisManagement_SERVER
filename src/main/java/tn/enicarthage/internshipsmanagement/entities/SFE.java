@@ -35,4 +35,11 @@ public class SFE {
     @OneToOne(mappedBy = "sfe")
     @JsonIgnore
     private Soutenance soutenance;
+
+    public SFE(int id, String sujet, User etudiant, User encadreur) {
+        this.id = id;
+        this.sujet = sujet;
+        this.etudiant = etudiant;
+        this.encadreur = encadreur;
+    }
 }

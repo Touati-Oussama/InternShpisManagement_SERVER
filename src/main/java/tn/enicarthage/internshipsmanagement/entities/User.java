@@ -75,11 +75,22 @@ public  class User implements UserDetails {
         return true;
     }
 
+
     @Override
     public boolean isEnabled() {
         return enabled;
     }
 
 
-
+    public User(Long userId, String username, String email, String nom, String prenom, String telephone, String password, ERole role, boolean enabled) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+    }
 }
